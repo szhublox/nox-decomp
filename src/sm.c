@@ -145,8 +145,8 @@ void CONNECT_PREPARE (sm_args_t *args)
   int v6; // [esp+14h] [ebp-A0h]
   BYTE Data[153]; // [esp+18h] [ebp-9Ch]
 
-  sub_43BEB0(&v5, &v4, &v6);
-  v1 = sub_431770();
+  nox_xxx_gameGetScreenBoundaries_43BEB0_get_video_mode(&v5, &v4, &v6);
+  v1 = nox_xxx_getHostInfoPtr_431770();
   nox_wcscpy((wchar_t *)v1, (const wchar_t *)&byte_5D4594[2661908]);
   v1[66] = byte_5D4594[2661958];
   *(_WORD *)(v1 + 71) = *(_WORD *)&byte_5D4594[2661888];
@@ -190,7 +190,7 @@ void CONNECT_PREPARE (sm_args_t *args)
   }
   else
   {
-    v3 = sub_43B320();
+    v3 = nox_client_getServerPort_43B320();
     GOTO_CONNECT_SERVER((char *)&byte_587000[85680], v3, Data);
   }
 }
@@ -426,7 +426,7 @@ void CONNECT_RESULT (sm_args_t *args)
         }
         if ( !sub_40A5C0(0x100000) )
         {
-          sub_43BEB0(&v26, &v28, &v25);
+          nox_xxx_gameGetScreenBoundaries_43BEB0_get_video_mode(&v26, &v28, &v25);
           if ( !v26 )
             sub_43BEF0(640, 480, v25);
           if ( !sub_43BF10(0) )
@@ -513,9 +513,9 @@ void f(int reentrant)
       {
         v23 = sub_409E10();
         sub_4D39F0(v23);
-        if ( !sub_4D4320() )
+        if ( !nox_xxx_mapGenStart_4D4320() )
         {
-          sub_4D12E0(0);
+          nox_xxx_mapSwitchLevel_4D12E0(0);
           return;
         }
         sub_4D3C30();

@@ -125,7 +125,7 @@ extern int nox_lobby_register_game(const char *name, const char *map,
 
 // Packet builder used for serverinfo (your existing function).
 // Signature based on your compat.c usage.
-extern int sub_554040(int *dummy3, int outcap, char *outbuf);
+extern int nox_server_makeServerInfoPacket_554040(int *dummy3, int outcap, char *outbuf);
 
 // -----------------------------------------------------------------------------
 // Logging toggles (env-controlled)
@@ -606,9 +606,9 @@ static int lobby_poll_thread_fn(void *arg)
 
         unsigned char buf[256];
         int dummy[3] = {0,0,0};
-        int len = sub_554040(dummy, (int)sizeof(buf), (char *)buf);
+        int len = nox_server_makeServerInfoPacket_554040(dummy, (int)sizeof(buf), (char *)buf);
 
-        PACKETLOG("netextras: sub_554040() -> len=%d\n", len);
+        PACKETLOG("netextras: nox_server_makeServerInfoPacket_554040() -> len=%d\n", len);
 
         if (len > 0 && len >= 73 && buf[2] == 0x0D) {
             compat_hexdump("NET host serverinfo", buf, (size_t)len);
@@ -646,7 +646,7 @@ static void lobby_kickoff_once(int sockfd)
 
     unsigned char buf[256];
     int dummy[3] = {0,0,0};
-    int len = sub_554040(dummy, (int)sizeof(buf), (char *)buf);
+    int len = nox_server_makeServerInfoPacket_554040(dummy, (int)sizeof(buf), (char *)buf);
     if (len > 0 && len >= 73 && buf[2] == 0x0D) {
         maybe_register_lobby_from_serverinfo(sockfd, buf, (size_t)len);
     }

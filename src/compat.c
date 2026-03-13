@@ -792,7 +792,7 @@ void build_server_info(void *arg)
         return;
     }
 
-    length = sub_554040(dummy, sizeof(buf), buf);
+    length = nox_server_makeServerInfoPacket_554040(dummy, sizeof(buf), buf);
 //    dhexdump(buf, length);
     if (oldlen != length || memcmp(buf, oldbuf, length) != 0)
     {
@@ -830,7 +830,7 @@ void build_server_info(void *arg)
 //
 //    for (;;)
 //    {
-//        int len = sub_554040(dummy, sizeof(buf), buf);
+//        int len = nox_server_makeServerInfoPacket_554040(dummy, sizeof(buf), buf);
 //        dhexdump(buf, len);
 //        if (len <= 0) {
 //            // Nothing to advertise, just wait and retry
